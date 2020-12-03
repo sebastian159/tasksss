@@ -1,0 +1,34 @@
+body
+{
+    background: #fafafa;
+}
+
+#created-time
+{
+    font-size: .7rem;
+    color: gray;
+}
+
+#task-div
+{
+    border: 1px solid silver;
+    border-radius: .25rem;
+    background: white;
+    padding: 10px;
+    margin: 10px;
+}
+
+#completed-tasks
+{
+    background: #eeeeee;
+}
+
+#delete-task
+{
+    color: #fe6993;
+    background: #fe6993;
+    border-radius: 3px;
+    padding: .2em;
+    line-height: 2em;
+}
+

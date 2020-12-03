@@ -1,0 +1,88 @@
+{% extends "tasks/base.html" %}
+{% load crispy_forms_filters %}
+{% load crispy_forms_tags %}
+
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    {% block title %}
+        <title>To-Do-List</title>
+    {% endblock %}
+</head>
+<body>
+    <style>
+        body {background: #fafafa;}
+    </style>
+    {% block body %}
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-sm align-content-center">
+                <h1 class="display-4" style="text-align: center">TO-DO-LIST</h1>
+            </div>
+        </div>
+        <div class="row">
+
+
+{#            <div class="input-group mb-3">#}
+{#                <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2">#}
+{#                        {% csrf_token %}#}
+{#                        {{ form.task }}#}
+{#                <div class="input-group-append">#}
+{#                <button class="btn btn-outline-secondary" type="submit" id="button-addon2">ADD</button>#}
+{#                </div>#}
+{#            </div>#}
+{#aria-label="Enter Task" aria-describedby="button-addon2"#}
+
+            <div class="col-sm align-content-center" >
+                <div class="input-group mb-3">
+                    <form style="text-align: center"  method="post">
+                        <form type="text"  method="post">
+                        {% csrf_token %}
+                        {{ form|crispy }}
+                            <button class="btn btn-primary" type="submit" ><i class="fas fa-1x"</i> ADD </button>
+                        </form>
+                </div>
+
+        </div>
+    </div>
+
+        {% for t in tasks %}
+            <div class="row" style="border: 1px solid silver;
+                border-radius: .25rem;
+                background: white;
+                padding: 10px;
+                margin: 10px;" id="background">
+                <div class="col-sm" id="info">
+                    <strong>{{ t.task }}</strong>
+                    <br>
+                    <span style="font-size: .7rem; color: gray;">{{ t.created_at }}</span>
+                </div>
+                <div class="col-sm">
+                    <a class="btn btn-danger" href="{% url 'delete' t.id%}" style="float: right">Delete</a>
+                    <a class="btn btn-primary" href="{% url 'update' t.id%}" style="float: right">Update</a>
+                    <a class="btn btn-success" href="{% url 'complete' t.id%}" id="{{ t.id }}" style= "color: white; float: right";>Completed</a>
+                </div>
+
+            <script>
+                    $(document).ready(function(){
+                        $('#{{t.id}}').click(function(){
+                            $('#{{ t.id }}').hide();
+                            $('#info').wrap("<strike>");
+                            $('#background').css('background','#eeeeee')
+                        });
+                        });
+            </script>
+
+            </div>
+        {% endfor %}
+
+
+    {% endblock %}
+
+
+
+
+</body>
